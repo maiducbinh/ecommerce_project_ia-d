@@ -1,0 +1,40 @@
+<!-- src/main/resources/templates/admin/products.html -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Quản Lý Sản Phẩm</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<h2>Quản Lý Sản Phẩm</h2>
+<a href="/admin/products/add">Thêm Sản Phẩm Mới</a>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Tên</th>
+        <th>Giá</th>
+        <th>Loại</th>
+        <th>Thao Tác</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${items}">
+        <td th:text="${item.id}">1</td>
+        <td th:text="${item.name}">Tên Sản Phẩm</td>
+        <td th:text="${item.price}">0.00</td>
+        <td th:text="${item.dtype}">Loại</td>
+        <td>
+            <a th:href="@{|/admin/products/edit/${item.id}|}">Chỉnh Sửa</a> |
+            <a th:href="@{|/admin/products/delete/${item.id}|}"
+               onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">Xóa</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/admin/customers">Quản Lý Khách Hàng</a> |
+<a href="/items">Quay Lại Trang Sản Phẩm</a> |
+<a href="/logout">Đăng Xuất</a>
+</body>
+</html>

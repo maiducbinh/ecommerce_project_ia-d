@@ -1,0 +1,34 @@
+<!-- src/main/resources/templates/admin/edit_customer.html -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chỉnh Sửa Khách Hàng</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<h2>Chỉnh Sửa Khách Hàng</h2>
+<form th:action="@{|/admin/customers/edit/${customer.id}|}" th:object="${customer}" method="post">
+    <div>
+        <label>Tên Người Dùng:</label>
+        <input type="text" th:field="*{username}" required/>
+    </div>
+    <div>
+        <label>Email:</label>
+        <input type="email" th:field="*{email}" required/>
+    </div>
+    <div>
+        <label>Vai Trò:</label>
+        <select name="roles" multiple required>
+            <option value="ROLE_USER" th:selected="${#lists.contains(customer.roles.?[name == 'ROLE_USER'].name, 'ROLE_USER')}">USER</option>
+            <option value="ROLE_ADMIN" th:selected="${#lists.contains(customer.roles.?[name == 'ROLE_ADMIN'].name, 'ROLE_ADMIN')}">ADMIN</option>
+        </select>
+    </div>
+    <div>
+        <button type="submit">Cập Nhật Khách Hàng</button>
+    </div>
+</form>
+<a href="/admin/customers">Quay Lại Quản Lý Khách Hàng</a> |
+<a href="/logout">Đăng Xuất</a>
+</body>
+</html>

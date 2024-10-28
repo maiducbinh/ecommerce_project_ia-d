@@ -1,0 +1,52 @@
+<!-- src/main/resources/templates/item_detail.html -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${item.name}">Item Detail</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<h2 th:text="${item.name}">Item Name</h2>
+<p th:text="${item.description}">Item Description</p>
+<p>Price: $<span th:text="${item.price}">0.00</span></p>
+
+<form th:action="@{/cart/add}" method="post">
+    <input type="hidden" name="itemId" th:value="${item.id}"/>
+    <button type="submit">Add to Cart</button>
+</form>
+
+<h3>Comments</h3>
+<ul>
+    <li th:each="comment : ${comments}">
+        <strong th:text="${comment.customer.username}">Username</strong>: <span th:text="${comment.content}">Comment</span>
+    </li>
+</ul>
+<form th:action="@{/comments/add}" method="post">
+    <input type="hidden" name="itemId" th:value="${item.id}"/>
+    <textarea name="content" placeholder="Add a comment..." required></textarea>
+    <button type="submit">Submit Comment</button>
+</form>
+
+<h3>Ratings</h3>
+<ul>
+    <li th:each="rating : ${ratings}">
+        <strong th:text="${rating.customer.username}">Username</strong>:
+        <span th:text="${rating.score}">5</span> / 5
+    </li>
+</ul>
+<form th:action="@{/ratings/add}" method="post">
+    <input type="hidden" name="itemId" th:value="${item.id}"/>
+    <label for="score">Rate this item:</label>
+    <select name="score" required>
+        <option value="">Select</option>
+        <option th:each="i : ${#numbers.sequence(1,5)}" th:value="${i}" th:text="${i}">1</option>
+    </select>
+    <button type="submit">Submit Rating</button>
+</form>
+
+<a href="/items">Back to Products</a>
+<a href="/cart">View Cart</a>
+<a href="/logout">Logout</a>
+</body>
+</html>

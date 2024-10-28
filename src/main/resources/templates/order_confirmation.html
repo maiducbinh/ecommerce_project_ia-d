@@ -1,0 +1,23 @@
+<!-- src/main/resources/templates/order_confirmation.html -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Order Confirmation</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<h2>Order Confirmation</h2>
+<p>Thank you for your purchase!</p>
+<div>
+    <h3>Order Details:</h3>
+    <p>Order ID: <span th:text="${order.id}">123</span></p>
+    <p>Payment Method: <span th:text="${order.payment.method}">PayPal</span></p>
+    <p>Shipment Method: <span th:text="${order.shipment.method}">Drone</span></p>
+    <p>Payment Status: <span th:text="${order.payment.status}">Completed</span></p>
+    <p>Shipment Status: <span th:text="${order.shipment.status}">Shipped</span></p>
+</div>
+<a href="/items">Back to Products</a>
+<a href="/logout">Logout</a>
+</body>
+</html>

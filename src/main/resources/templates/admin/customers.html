@@ -1,0 +1,40 @@
+<!-- src/main/resources/templates/admin/customers.html -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Quản Lý Khách Hàng</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<h2>Quản Lý Khách Hàng</h2>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Tên Người Dùng</th>
+        <th>Email</th>
+        <th>Vai Trò</th>
+        <th>Thao Tác</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="customer : ${customers}">
+        <td th:text="${customer.id}">1</td>
+        <td th:text="${customer.username}">Tên Người Dùng</td>
+        <td th:text="${customer.email}">email@example.com</td>
+        <td>
+            <span th:each="role : ${customer.roles}" th:text="${role.name}">ROLE_USER</span>
+        </td>
+        <td>
+            <a th:href="@{|/admin/customers/edit/${customer.id}|}">Chỉnh Sửa</a> |
+            <a th:href="@{|/admin/customers/delete/${customer.id}|}"
+               onclick="return confirm('Bạn có chắc chắn muốn xóa khách hàng này?');">Xóa</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/admin/products">Quản Lý Sản Phẩm</a> |
+<a href="/logout">Đăng Xuất</a>
+</body>
+</html>

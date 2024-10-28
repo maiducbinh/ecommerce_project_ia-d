@@ -1,0 +1,64 @@
+<!-- src/main/resources/templates/cart.html -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cart</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<h2>Your Cart</h2>
+<div th:if="${cart.items.isEmpty()}">
+    <p>Your cart is empty.</p>
+    <a href="/items">Continue Shopping</a>
+</div>
+<div th:unless="${cart.items.isEmpty()}">
+    <table>
+        <thead>
+        <tr>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${cart.items}">
+            <td th:text="${item.name}">Item Name</td>
+            <td th:text="${item.price}">0.00</td>
+            <td>
+                <form th:action="@{/cart/remove}" method="post">
+                    <input type="hidden" name="itemId" th:value="${item.id}"/>
+                    <button type="submit">Remove</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <p>Total: $<span th:text="${#numbers.formatDecimal(cart.items.?[price].sum(), 1, 'POINT', 2, 'DECIMAL')}">0.00</span></p>
+    </div>
+    <form th:action="@{/order/checkout}" method="post">
+        <div>
+            <label>Payment Method:</label>
+            <select name="paymentMethod" required>
+                <option value="">Select</option>
+                <option value="PayPal">PayPal</option>
+                <!-- Add more payment methods if needed -->
+            </select>
+        </div>
+        <div>
+            <label>Shipping Method:</label>
+            <select name="shipmentMethod" required>
+                <option value="">Select</option>
+                <option value="Drone">Drone</option>
+                <option value="Standard">Standard</option>
+                <!-- Add more shipping methods if needed -->
+            </select>
+        </div>
+        <button type="submit">Checkout</button>
+    </form>
+</div>
+<a href="/items">Continue Shopping</a>
+<a href="/logout">Logout</a>
+</body>
+</html>
