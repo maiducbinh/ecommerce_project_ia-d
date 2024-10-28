@@ -3,28 +3,34 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Items</title>
+    <title>Danh Sách Sản Phẩm</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
 </head>
 <body>
-<h2>Product List</h2>
-<form th:action="@{/items}" method="get">
-    <input type="text" name="search" placeholder="Search items..." th:value="${param.search}"/>
-    <button type="submit">Search</button>
-</form>
-<div>
-    <ul>
-        <li th:each="item : ${items}">
+<h2>Danh Sách Sản Phẩm</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Tên</th>
+        <th>Giá</th>
+        <th>Thao Tác</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${items}">
+        <td>
             <a th:href="@{|/items/${item.id}|}" th:text="${item.name}">Item Name</a>
-            - $<span th:text="${item.price}">0.00</span>
-            <form th:action="@{/cart/add}" method="post" style="display:inline;">
-                <input type="hidden" name="itemId" th:value="${item.id}"/>
-                <button type="submit">Add to Cart</button>
+        </td>
+        <td th:text="${item.price}">0.00</td>
+        <td>
+            <form th:action="@{|/cart/add/${item.id}|}" method="post">
+                <button type="submit">Thêm Vào Giỏ Hàng</button>
             </form>
-        </li>
-    </ul>
-</div>
-<a href="/cart">View Cart</a>
-<a href="/logout">Logout</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/cart">Xem Giỏ Hàng</a> |
+<a href="/logout">Đăng Xuất</a>
 </body>
 </html>
