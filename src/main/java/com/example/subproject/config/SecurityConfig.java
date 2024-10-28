@@ -1,4 +1,4 @@
-// src/main/java/com/example/ecommerce/config/SecurityConfig.java
+// src/main/java/com/example/subproject/config/SecurityConfig.java
 
 package com.example.subproject.config;
 
@@ -67,10 +67,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
-                .csrf().disable()
+                .csrf().disable() // Tắt CSRF cho đơn giản (không khuyến khích trong môi trường production)
                 .authorizeHttpRequests()
                 .requestMatchers("/register", "/login", "/css/**", "/js/**").permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
+                .requestMatchers("/cart/**", "/checkout/**").hasAnyRole("USER", "ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -83,4 +84,3 @@ public class SecurityConfig {
         return http.build();
     }
 }
-
