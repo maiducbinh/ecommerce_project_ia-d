@@ -167,13 +167,6 @@ public class DataInitializer implements CommandLineRunner {
             order1.setCart(cart);
             orderRepository.save(order1);
 
-            Order order2 = new Order();
-            order2.setCustomer(user);
-            order2.setShipment(shipment2);
-            order2.setPayment(payment2);
-            order2.setCart(cart);
-            orderRepository.save(order2);
-
             // Tạo Comments
             Comment comment1 = new Comment();
             comment1.setContent("Great book on Java!");
