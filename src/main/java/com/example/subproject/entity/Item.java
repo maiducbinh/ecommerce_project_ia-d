@@ -1,7 +1,5 @@
 package com.example.subproject.entity;
 
-// src/main/java/com/example/ecommerce/entity/Item.java
-
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,6 +24,18 @@ public abstract class Item {
     private Double price;
 
     private String description;
+
+    // Thêm trường type
+    @Enumerated(EnumType.STRING)
+    private ItemType type;  // Loại của item
+
+    // Constructor có tham số để thiết lập type
+    public Item(String name, Double price, String description, ItemType type) {
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.type = type;
+    }
 
     // Many-to-Many with Cart
     @ManyToMany(mappedBy = "items")

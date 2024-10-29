@@ -1,5 +1,3 @@
-<!-- src/main/resources/templates/items.html -->
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -16,6 +14,7 @@
     <tr>
         <th>Tên</th>
         <th>Giá</th>
+        <th>Loại</th> <!-- Thêm cột Loại -->
         <th>Thao Tác</th>
     </tr>
     </thead>
@@ -25,6 +24,7 @@
             <a th:href="@{|/items/${item.id}|}" th:text="${item.name}">Item Name</a>
         </td>
         <td th:text="${item.price}">0.00</td>
+        <td th:text="${item.type}">Loại</td> <!-- Hiển thị loại -->
         <td>
             <form th:action="@{|/cart/add/${item.id}|}" method="post">
                 <button type="submit">Thêm Vào Giỏ Hàng</button>
