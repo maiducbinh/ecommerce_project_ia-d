@@ -1,23 +1,23 @@
 <!-- src/main/resources/templates/order_confirmation.html -->
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Order Confirmation</title>
+    <title>Xác Nhận Đơn Hàng</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
 </head>
 <body>
-<h2>Order Confirmation</h2>
-<p>Thank you for your purchase!</p>
+<h2>Xác Nhận Đơn Hàng</h2>
+<p>Cảm ơn bạn đã mua hàng!</p>
 <div>
-    <h3>Order Details:</h3>
-    <p>Order ID: <span th:text="${order.id}">123</span></p>
-    <p>Payment Method: <span th:text="${order.payment.method}">PayPal</span></p>
-    <p>Shipment Method: <span th:text="${order.shipment.method}">Drone</span></p>
-    <p>Payment Status: <span th:text="${order.payment.status}">Completed</span></p>
-    <p>Shipment Status: <span th:text="${order.shipment.status}">Shipped</span></p>
+    <h3>Chi Tiết Đơn Hàng:</h3>
+    <p>Mã Đơn Hàng: <span th:text="${order.id}">123</span></p>
+    <p>Phương Thức Thanh Toán: <span th:text="${order.payment.method}">PayPal</span></p>
+    <p>Phương Thức Vận Chuyển: <span th:text="${order.shipment.method}">Drone</span></p>
+    <p>Tình Trạng Thanh Toán: <span th:text="${order.payment.status}">Đã Hoàn Thành</span></p>
+    <p>Tình Trạng Vận Chuyển: <span th:text="${order.shipment.status}">Đã Gửi</span></p>
+    <p>Tổng Tiền: <span th:text="${order.cart.items.stream().mapToDouble(item -> item.price).sum()}">0.00</span> VND</p>
 </div>
-<a href="/items">Back to Products</a>
-<a href="/logout">Logout</a>
+<a href="/items">Quay Lại Sản Phẩm</a>
+<a href="/logout">Đăng Xuất</a>
 </body>
 </html>

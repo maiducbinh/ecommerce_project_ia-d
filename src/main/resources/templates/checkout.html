@@ -1,0 +1,46 @@
+<!-- src/main/resources/templates/checkout.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thanh Toán</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<h2>Thanh Toán</h2>
+
+<!-- Hiển thị lỗi nếu có -->
+<div th:if="${error}" style="color: red;">
+    <p th:text="${error}"></p>
+</div>
+
+<form th:action="@{/order/checkout}" method="post">
+    <div>
+        <label for="paymentMethod">Phương Thức Thanh Toán:</label>
+        <select id="paymentMethod" name="paymentMethod" required>
+            <option value="" disabled selected>-- Chọn phương thức --</option>
+            <option value="Credit Card">Thẻ Tín Dụng</option>
+            <option value="PayPal">PayPal</option>
+            <option value="Bank Transfer">Chuyển Khoản Ngân Hàng</option>
+            <!-- Thêm các phương thức thanh toán khác nếu cần -->
+        </select>
+    </div>
+
+    <div>
+        <label for="shipmentMethod">Phương Thức Vận Chuyển:</label>
+        <select id="shipmentMethod" name="shipmentMethod" required>
+            <option value="" disabled selected>-- Chọn phương thức --</option>
+            <option value="Standard Shipping">Vận Chuyển Tiêu Chuẩn</option>
+            <option value="Express Shipping">Vận Chuyển Nhanh</option>
+            <option value="Drone Delivery">Vận Chuyển Drone</option>
+            <!-- Thêm các phương thức vận chuyển khác nếu cần -->
+        </select>
+    </div>
+
+    <div>
+        <button type="submit">Hoàn Tất Đơn Hàng</button>
+    </div>
+</form>
+
+<a href="/cart">Quay Lại Giỏ Hàng</a>
+</body>
+</html>
