@@ -1,3 +1,5 @@
+// src/main/java/com/example/subproject/controller/AdminController.java
+
 package com.example.subproject.controller;
 
 import com.example.subproject.dto.ProductForm;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Controller
@@ -34,6 +37,20 @@ public class AdminController {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private ShipmentRepository shipmentRepository;
+
+    @Autowired
+    private PaymentRepository paymentRepository;
+
+    @Autowired
+    private CommentRepository commentRepository;
+
+    @Autowired
+    private RatingRepository ratingRepository;
+
+    // Quản lý Sản Phẩm
 
     @GetMapping("/products")
     public String listProducts(Model model){

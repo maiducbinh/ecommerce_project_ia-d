@@ -37,10 +37,6 @@ public class AuthController {
             model.addAttribute("error", "Username already exists");
             return "register";
         }
-        if(customerService.findByEmail(customer.getEmail()).isPresent()){
-            model.addAttribute("error", "Email already in use");
-            return "register";
-        }
         customerService.registerCustomer(customer);
         return "redirect:/login";
     }
