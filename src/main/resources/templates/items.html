@@ -3,18 +3,37 @@
 <head>
     <title>Danh Sách Sản Phẩm</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <script>
+        function clearSearch() {
+            // Xóa giá trị trong ô tìm kiếm
+            document.getElementById("searchInput").value = "";
+            // Điều hướng về trang gốc mà không có tham số search
+            window.location.href = "/items";
+        }
+
+        function checkSearch(event) {
+            // Lấy giá trị của ô tìm kiếm
+            const searchInput = document.getElementById("searchInput").value;
+            // Nếu trống, ngăn gửi biểu mẫu và điều hướng về trang gốc
+            if (searchInput.trim() === "") {
+                event.preventDefault(); // Ngăn không gửi biểu mẫu
+                window.location.href = "/items"; // Điều hướng về trang gốc
+            }
+        }
+    </script>
 </head>
 <body>
-<form th:action="@{/items}" method="get">
-    <input type="text" name="search" placeholder="Search items..." th:value="${param.search}"/>
+<form th:action="@{/items}" method="get" onsubmit="checkSearch(event)">
+    <input type="text" id="searchInput" name="search" placeholder="Search items..." th:value="${param.search}"/>
     <button type="submit">Search</button>
+    <button type="button" onclick="clearSearch()">Clear Search</button> <!-- Nút Clear Search -->
 </form>
 <table>
     <thead>
     <tr>
         <th>Tên</th>
         <th>Giá</th>
-        <th>Loại</th> <!-- Thêm cột Loại -->
+        <th>Loại</th>
         <th>Thao Tác</th>
     </tr>
     </thead>
@@ -24,7 +43,7 @@
             <a th:href="@{|/items/${item.id}|}" th:text="${item.name}">Item Name</a>
         </td>
         <td th:text="${item.price}">0.00</td>
-        <td th:text="${item.type}">Loại</td> <!-- Hiển thị loại -->
+        <td th:text="${item.type}">Loại</td>
         <td>
             <form th:action="@{|/cart/add/${item.id}|}" method="post">
                 <button type="submit">Thêm Vào Giỏ Hàng</button>
