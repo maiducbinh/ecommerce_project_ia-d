@@ -35,7 +35,7 @@ public class OrderController {
 
         if(cart.getItems().isEmpty()){
             model.addAttribute("error", "Your cart is empty!");
-            return "cart";
+            return "view_cart";
         }
 
         // Calculate total amount

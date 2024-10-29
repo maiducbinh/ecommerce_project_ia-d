@@ -39,10 +39,16 @@ public class CartController {
             return "redirect:/login";
         }
 
-        Cart cart = cartRepository.findByCustomerId(customer.getId()).orElse(new Cart());
+        Cart cart = cartRepository.findByCustomerId(customer.getId()).orElseGet(() -> {
+            Cart newCart = new Cart();
+            newCart.setCustomer(customer); // Liên kết giỏ hàng với khách hàng
+            return cartRepository.save(newCart); // Lưu giỏ hàng mới vào cơ sở dữ liệu
+        });
+
         model.addAttribute("cart", cart);
         return "cart/view_cart";
     }
+
 
     // Thêm Sản Phẩm Vào Giỏ Hàng
     @PostMapping("/add/{itemId}")
